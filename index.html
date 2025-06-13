@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <title>Fırlanan Suallar Çarxı</title>
+  <style>
+    body { font-family: Arial; text-align: center; background-color: #f5f5f5; }
+    #wheel { width: 300px; height: 300px; border-radius: 50%; border: 10px solid #444; margin: 20px auto; position: relative; }
+    #spinBtn { padding: 10px 20px; font-size: 18px; cursor: pointer; }
+    #questionBox { background: white; padding: 20px; margin: 20px auto; width: 80%; max-width: 600px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.2); display: none; }
+    .option { display: block; text-align: left; margin: 5px 0; }
+    #revealBtn { margin-top: 15px; padding: 8px 16px; display: none; }
+    #correctAnswer { font-weight: bold; color: green; margin-top: 10px; display: none; }
+  </style>
+</head>
+<body>
+  <h1>Fırlanan Suallar Çarxı</h1>
+  <canvas id="wheel" width="300" height="300"></canvas>
+  <button id="spinBtn">Çarxı fırlat</button>
+
+  <div id="questionBox">
+    <div id="questionText"></div>
+    <div id="options"></div>
+    <button id="revealBtn">Cavabı göstər</button>
+    <div id="correctAnswer"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "Hansı sosial media platforması paylaşımlarda simvol (karakter) limiti ilə tanınır?",
+        options: ["Instagram", "Twitter", "Facebook", "LinkedIn"],
+        answer: "Twitter"
+      },
+      {
+        question: "Sıxılmış (compressed) rəqəmsal arxiv faylı yaratmaq hansı fayl formatını əmələ gətirə bilər?",
+        options: ["MP3", "ZIP", "PDF", "JPEG"],
+        answer: "ZIP"
+      },
+      {
+        question: "FOSS qısaltması nəyi ifadə edir?",
+        options: [
+          "Follow-On Support Service",
+          "Free and Open-Source Software (Pulsuz və Açıq Mənbə Proqram Təminatı)",
+          "Fiber Optics Science System",
+          "Full Option Sensor System"
+        ],
+        answer: "Free and Open-Source Software (Pulsuz və Açıq Mənbə Proqram Təminatı)"
+      }
+      // Buraya daha çox sual əlavə etmək olar...
+    ];
+
+    const canvas = document.getElementById('wheel');
+    const ctx = canvas.getContext('2d');
+    const spinBtn = document.getElementById('spinBtn');
+    const questionBox = document.getElementById('questionBox');
+    const questionText = document.getElementById('questionText');
+    const optionsDiv = document.getElementById('options');
+    const revealBtn = document.getElementById('revealBtn');
+    const correctAnswer = document.getElementById('correctAnswer');
+
+    let angle = 0;
+    let currentQuestion = null;
+
+    function drawWheel() {
+      const sectionAngle = 2 * Math.PI / questions.length;
+      questions.forEach((q, i) => {
+        ctx.beginPath();
+        ctx.moveTo(150, 150);
+        ctx.fillStyle = i % 2 === 0 ? '#ffcc00' : '#ff9900';
+        ctx.arc(150, 150, 150, i * sectionAngle, (i + 1) * sectionAngle);
+        ctx.fill();
+        ctx.save();
+        ctx.translate(150, 150);
+        ctx.rotate((i + 0.5) * sectionAngle);
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#000";
+        ctx.font = "14px Arial";
+        ctx.fillText(`Sual ${i + 1}`, 140, 5);
+        ctx.restore();
+      });
+    }
+
+    function spinWheel() {
+      const index = Math.floor(Math.random() * questions.length);
+      currentQuestion = questions[index];
+      displayQuestion(currentQuestion);
+    }
+
+    function displayQuestion(q) {
+      questionText.textContent = q.question;
+      optionsDiv.innerHTML = '';
+      q.options.sort(() => Math.random() - 0.5).forEach(opt => {
+        const label = document.createElement('label');
+        label.className = 'option';
+        label.textContent = opt;
+        optionsDiv.appendChild(label);
+      });
+      questionBox.style.display = 'block';
+      revealBtn.style.display = 'inline-block';
+      correctAnswer.style.display = 'none';
+    }
+
+    revealBtn.onclick = () => {
+      correctAnswer.textContent = `Doğru cavab: ${currentQuestion.answer}`;
+      correctAnswer.style.display = 'block';
+    };
+
+    spinBtn.onclick = () => {
+      spinWheel();
+    };
+
+    drawWheel();
+  </script>
+</body>
+</html>
