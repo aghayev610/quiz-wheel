@@ -27,27 +27,16 @@
 
   <script>
     const questions = [
-      {
-        question: "Hansı sosial media platforması paylaşımlarda simvol (karakter) limiti ilə tanınır?",
-        options: ["Instagram", "Twitter", "Facebook", "LinkedIn"],
-        answer: "Twitter"
-      },
-      {
-        question: "Sıxılmış (compressed) rəqəmsal arxiv faylı yaratmaq hansı fayl formatını əmələ gətirə bilər?",
-        options: ["MP3", "ZIP", "PDF", "JPEG"],
-        answer: "ZIP"
-      },
-      {
-        question: "FOSS qısaltması nəyi ifadə edir?",
-        options: [
-          "Follow-On Support Service",
-          "Free and Open-Source Software (Pulsuz və Açıq Mənbə Proqram Təminatı)",
-          "Fiber Optics Science System",
-          "Full Option Sensor System"
-        ],
-        answer: "Free and Open-Source Software (Pulsuz və Açıq Mənbə Proqram Təminatı)"
-      }
-      // Buraya daha çox sual əlavə etmək olar...
+      { question: "Hansı sosial media platforması paylaşımlarda simvol (karakter) limiti ilə tanınır?", options: ["Instagram", "Twitter", "Facebook", "LinkedIn"], answer: "Twitter" },
+      { question: "Sıxılmış (compressed) rəqəmsal arxiv faylı yaratmaq hansı fayl formatını əmələ gətirə bilər?", options: ["MP3", "ZIP", "PDF", "JPEG"], answer: "ZIP" },
+      { question: "FOSS qısaltması nəyi ifadə edir?", options: ["Follow-On Support Service", "Free and Open-Source Software (Pulsuz və Açıq Mənbə Proqram Təminatı)", "Fiber Optics Science System", "Full Option Sensor System"], answer: "Free and Open-Source Software (Pulsuz və Açıq Mənbə Proqram Təminatı)" },
+      { question: "Instagram Facebook tərəfindən alınmadan əvvəl hansı adla tanınırdı?", options: ["Hipstamatic", "Prisma", "Pixlr", "Burbn"], answer: "Burbn" },
+      { question: "2017-ci ildə Sophiaya vətəndaşlıq verən və onu vətəndaşlıq alan ilk robot edən ölkə hansıdır?", options: ["Yaponiya", "Almaniya", "Birləşmiş Ştatlar (ABŞ)", "Səudiyyə Ərəbistanı"], answer: "Səudiyyə Ərəbistanı" },
+      { question: "Barmaq izi və səs nümunəsi kimi unikal fiziki və ya davranış xüsusiyyətlərini analiz edərək istifadəçiləri autentifikasiya edən texnologiya necə adlanır?", options: ["Facial Recognition", "RFID", "QR Code Scanning", "Biometrics (Biometrik texnologiya)"], answer: "Biometrics (Biometrik texnologiya)" },
+      { question: "Proqram təminatı inkişafında “DevOps” termini nəyi ifadə edir?", options: ["Mobil tətbiqlərin yerləşdirilməsi", "Yeni əməliyyat sistemlərinin hazırlanması", "Optik yaddaş həllərinin dizaynı", "İnkişaf və əməliyyat komandaları arasında əməkdaşlıq"], answer: "İnkişaf və əməliyyat komandaları arasında əməkdaşlıq" },
+      { question: "İstifadəçilərin smartfonlarını terminallara toxunduraraq və ya yaxınlaşdıraraq naqilsiz ödəniş etməsinə imkan verən texnologiya hansıdır?", options: ["QR Code", "Bluetooth", "RFID", "Near Field Communication (NFC)"], answer: "Near Field Communication (NFC)" },
+      { question: "Rəqəmsal innovasiyalar kontekstində Virtual Private Network (VPN) texnologiyasının məqsədi nədir?", options: ["Virtual reallıq təcrübələrini yaxşılaşdırmaq", "Rəqəmsal köməkçilərdə səs tanımanı təkmilləşdirmək", "Bulud hesablama performansını optimallaşdırmaq", "İnternet üzərindən təhlükəsiz və məxfi əlaqə təmin etmək"], answer: "İnternet üzərindən təhlükəsiz və məxfi əlaqə təmin etmək" }
+      // Daha çox sual əlavə etmək üçün buranı davam etdirə bilərsən.
     ];
 
     const canvas = document.getElementById('wheel');
@@ -59,7 +48,6 @@
     const revealBtn = document.getElementById('revealBtn');
     const correctAnswer = document.getElementById('correctAnswer');
 
-    let angle = 0;
     let currentQuestion = null;
 
     function drawWheel() {
